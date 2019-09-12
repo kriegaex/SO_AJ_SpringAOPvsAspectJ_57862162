@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 public class JobProcessImpl implements JobProcess {
   private static final Logger logger = LoggerFactory.getLogger(JobProcessImpl.class);
 
+  static {
+    logger.info("JobProcessImpl class was loaded");
+  }
+
   @Override
   public Object process(JobContext jobContext) {
     logger.info("Processing the job with jobid {}", jobContext.getJobId());
