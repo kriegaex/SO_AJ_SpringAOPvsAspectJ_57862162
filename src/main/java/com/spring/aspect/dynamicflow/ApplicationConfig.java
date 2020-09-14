@@ -1,8 +1,10 @@
 package com.spring.aspect.dynamicflow;
 
+import com.spring.aspect.dynamicflow.process.JobProcess;
+import com.spring.aspect.dynamicflow.process.JobProcessImpl;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.EnableLoadTimeWeaving;
 
 import static org.springframework.context.annotation.EnableLoadTimeWeaving.AspectJWeaving.ENABLED;
@@ -30,7 +32,12 @@ import static org.springframework.context.annotation.EnableLoadTimeWeaving.Aspec
  * understand why spring-instrument.jar is not enough, as described in the Spring manual.
  */
 @Configuration
-@EnableAspectJAutoProxy
+//@EnableAspectJAutoProxy
 @ComponentScan("com.spring.aspect.dynamicflow")
-//@EnableLoadTimeWeaving(aspectjWeaving = ENABLED)
-public class ApplicationConfig {}
+@EnableLoadTimeWeaving(aspectjWeaving = ENABLED)
+public class ApplicationConfig {
+  @Bean
+  public JobProcess jobProcess() {
+    return new JobProcessImpl();
+  }
+}
